@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { GameContext } from "./GameContext";
 
 const Square = ({ handleFinishTurn, id, turn, mark }) => {
+  const [{ status }, dispatch] = useContext(GameContext);
   const handleClick = () => {
     if (mark !== " ") {
       return alert("already filled");
@@ -9,7 +11,7 @@ const Square = ({ handleFinishTurn, id, turn, mark }) => {
     handleFinishTurn(id, nextTurn);
   };
   return (
-    <button onClick={handleClick}>
+    <button onClick={handleClick} disabled={status === "won"}>
       <div
         style={{
           width: 100,

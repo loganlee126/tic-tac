@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Board from "./Board";
-import { gameReducer, initialGame } from "./gameReducer";
+import { GameContext } from "./GameContext";
 
 const Game = () => {
   const [turn, setTurn] = useState("O");
-  const [{ status, squares }, dispatch] = useReducer(gameReducer, initialGame);
+
+  const [{ status, squares }, dispatch] = useContext(GameContext);
+
   const handleFinishTurn = (id, nextTurn) => {
     dispatch({ type: "turn", id, turn });
     setTurn(nextTurn);
