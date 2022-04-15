@@ -9,14 +9,23 @@ const Game = () => {
     useContext(GameContext);
   useEffect(() => {
     dispatch({ type: "checkWin" });
-    if (numberOfPlayers === 1 && turn === "X") {
-      dispatch({ type: "runAI" });
-    }
   }, [squares]);
+
+  useEffect(() => {
+    if (numberOfPlayers === 1 && turn === "X") {
+      setTimeout(() => {
+        if (status === "inProgress") {
+          dispatch({ type: "runAI", turn });
+        }
+      }, 500);
+    }
+  }, [turn, status]);
 
   const previousTurn = () => {
     return turn === "O" ? "X" : "O";
   };
+
+  const whosTurn = numberOfPlayers === 1 && turn === "X" ? "AI" : "Your";
 
   return (
     <>
@@ -25,9 +34,10 @@ const Game = () => {
         <SelectPlayMode dispatch={dispatch} />
       ) : (
         <>
-          {numberOfPlayers === 1 && <h2>Not Ready</h2>}
           <h3 style={{ color: "#edaa66" }}>
-            {status === "won" ? `${previousTurn()} won` : `Your turn ${turn}`}
+            {status === "won"
+              ? `${previousTurn()} won`
+              : `${whosTurn} turn ${turn}`}
           </h3>
           <Board squares={squares} />
           <PlayAgain />

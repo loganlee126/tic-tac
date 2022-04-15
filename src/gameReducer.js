@@ -26,6 +26,8 @@ const WinningCases = [
   [7, 8, 9],
 ];
 
+const preferredSqures = [5, 1, 3, 7, 9, 2, 4, 6, 8];
+
 const allThreeMatched = (squares, _case) => {
   return (
     squares[_case[0]] !== " " &&
@@ -44,10 +46,19 @@ const checkWinningStatus = (squares) => {
   return won;
 };
 
+const runAI = (squares) => {
+  for (let number of preferredSqures) {
+    if (squares[number] === " ") {
+      return number;
+    }
+  }
+};
+
 const gameReducer = (state, action) => {
   switch (action.type) {
     case "takeTurn":
       return {
+        ...state,
         squares: { ...state.squares, [action.id]: action.turn },
         turn: state.turn === "O" ? "X" : "O",
       };
@@ -64,6 +75,16 @@ const gameReducer = (state, action) => {
         ...state,
         numberOfPlayers: action.numberOfPlayers,
         status: "inProgress",
+      };
+    case "runAI":
+      if (state.status === "won") {
+        return state;
+      }
+      const aIPick = runAI(state.squares);
+      return {
+        ...state,
+        turn: state.turn === "O" ? "X" : "O",
+        squares: { ...state.squares, [aIPick]: action.turn },
       };
     default:
       throw new Error();
