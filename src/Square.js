@@ -5,7 +5,7 @@ const Square = ({ id, mark }) => {
   const [{ status, turn }, dispatch] = useContext(GameContext);
 
   const handleFinishTurn = (id) => {
-    dispatch({ type: "turn", id, turn });
+    dispatch({ type: "takeTurn", id, turn });
   };
 
   const handleClick = () => {
