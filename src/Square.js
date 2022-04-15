@@ -1,14 +1,18 @@
 import React, { useContext } from "react";
 import { GameContext } from "./GameContext";
 
-const Square = ({ handleFinishTurn, id, turn, mark }) => {
-  const [{ status }, dispatch] = useContext(GameContext);
+const Square = ({ id, mark }) => {
+  const [{ status, turn }, dispatch] = useContext(GameContext);
+
+  const handleFinishTurn = (id) => {
+    dispatch({ type: "turn", id, turn });
+  };
+
   const handleClick = () => {
     if (mark !== " ") {
       return alert("already filled");
     }
-    const nextTurn = turn === "O" ? "X" : "O";
-    handleFinishTurn(id, nextTurn);
+    handleFinishTurn(id);
   };
   return (
     <button onClick={handleClick} disabled={status === "won"}>

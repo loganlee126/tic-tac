@@ -1,68 +1,23 @@
 import React, { useState } from "react";
 import Square from "./Square";
 
-const Board = ({ handleFinishTurn, turn, squares }) => {
+const Board = ({ squares }) => {
   return (
     <>
       <div style={{ display: "flex" }}>
-        <Square
-          id={1}
-          handleFinishTurn={handleFinishTurn}
-          turn={turn}
-          mark={squares[1]}
-        />
-        <Square
-          id={2}
-          handleFinishTurn={handleFinishTurn}
-          turn={turn}
-          mark={squares[2]}
-        />
-        <Square
-          id={3}
-          handleFinishTurn={handleFinishTurn}
-          turn={turn}
-          mark={squares[3]}
-        />
+        <Square id={1} mark={squares[1]} />
+        <Square id={2} mark={squares[2]} />
+        <Square id={3} mark={squares[3]} />
       </div>
       <div style={{ display: "flex" }}>
-        <Square
-          id={4}
-          handleFinishTurn={handleFinishTurn}
-          turn={turn}
-          mark={squares[4]}
-        />
-        <Square
-          id={5}
-          handleFinishTurn={handleFinishTurn}
-          turn={turn}
-          mark={squares[5]}
-        />
-        <Square
-          id={6}
-          handleFinishTurn={handleFinishTurn}
-          turn={turn}
-          mark={squares[6]}
-        />
+        <Square id={4} mark={squares[4]} />
+        <Square id={5} mark={squares[5]} />
+        <Square id={6} mark={squares[6]} />
       </div>
       <div style={{ display: "flex" }}>
-        <Square
-          id={7}
-          handleFinishTurn={handleFinishTurn}
-          turn={turn}
-          mark={squares[7]}
-        />
-        <Square
-          id={8}
-          handleFinishTurn={handleFinishTurn}
-          turn={turn}
-          mark={squares[8]}
-        />
-        <Square
-          id={9}
-          handleFinishTurn={handleFinishTurn}
-          turn={turn}
-          mark={squares && squares[9]}
-        />
+        <Square id={7} mark={squares[7]} />
+        <Square id={8} mark={squares[8]} />
+        <Square id={9} mark={squares[9]} />
       </div>
     </>
   );

@@ -11,6 +11,7 @@ const initialGame = {
     8: " ",
     9: " ",
   },
+  turn: "O",
 };
 
 const WinningCases = [
@@ -48,6 +49,7 @@ const gameReducer = (state, action) => {
       return {
         ...state,
         squares: { ...state.squares, [action.id]: action.turn },
+        turn: state.turn === "O" ? "X" : "O",
       };
     case "checkWin":
       const checkWin = checkWinningStatus(state.squares);
@@ -55,6 +57,8 @@ const gameReducer = (state, action) => {
         ...state,
         status: checkWin ? "won" : "inProgress",
       };
+    case "initialize":
+      return initialGame;
     default:
       throw new Error();
   }

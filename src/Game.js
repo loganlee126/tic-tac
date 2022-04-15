@@ -1,16 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import Board from "./Board";
 import { GameContext } from "./GameContext";
+import PlayAgain from "./PlayAgain";
 
 const Game = () => {
-  const [turn, setTurn] = useState("O");
-
-  const [{ status, squares }, dispatch] = useContext(GameContext);
-
-  const handleFinishTurn = (id, nextTurn) => {
-    dispatch({ type: "turn", id, turn });
-    setTurn(nextTurn);
-  };
+  const [{ status, squares, turn }, dispatch] = useContext(GameContext);
 
   useEffect(() => {
     dispatch({ type: "checkWin" });
@@ -24,13 +18,10 @@ const Game = () => {
     <>
       <h2>Tic Tac Toe</h2>
       <h3 style={{ color: "#edaa66" }}>
-        {status.includes("won") ? `${previousTurn()} won` : `Your turn ${turn}`}
+        {status === "won" ? `${previousTurn()} won` : `Your turn ${turn}`}
       </h3>
-      <Board
-        turn={turn}
-        handleFinishTurn={handleFinishTurn}
-        squares={squares}
-      />
+      <Board squares={squares} />
+      <PlayAgain />
     </>
   );
 };
